@@ -19,7 +19,7 @@ var parameters = {
   screen_name: 'hefailsme',
   count: 20
 }
-// 
+
 if (command === "my-tweets") {
   client.get('statuses/user_timeline', parameters, function (error, tweets, response) {
     if (error) {
@@ -51,12 +51,11 @@ if (command === "spotify-this-song") {
         return console.log('Error occurred: ' + err)
 
       } else {
-        // console.log("caca")
         for (var i = 0; i < data.tracks.items[0].artists.length; i++) {
           if (i === 0) {
-            console.log("Artist(s):    " + data.tracks.items[0].artists[i].name);
+            console.log("Artist(s): " + data.tracks.items[0].artists[i].name);
           } else {
-            console.log("              " + data.tracks.items[0].artists[i].name);
+            console.log(" " + data.tracks.items[0].artists[i].name);
           }
         }
         console.log("Song:         " + data.tracks.items[0].name);
@@ -88,8 +87,6 @@ if (command === "movie-this") {
         console.log("* Plot of the movie:          " + JSON.parse(body).Plot);
         console.log("* Actors in the movie:        " + JSON.parse(body).Actors);
 
-        // For loop parses through Ratings object to see if there is a RT rating
-        // 	--> and if there is, it will print it
         for (var i = 0; i < JSON.parse(body).Ratings.length; i++) {
           if (JSON.parse(body).Ratings[i].Source === "Rotten Tomatoes") {
             console.log("* Rotten Tomatoes Rating:     " + JSON.parse(body).Ratings[i].Value)
@@ -119,21 +116,21 @@ if (command === "movie-this") {
 // App functionality from file read / loads fs npm package
 
 
-if (command === "do-what-it-says") {
-  fs.readFile("random.txt", "utf-8", function (error, data) {
+if (command === "do-what-it-says") //function searchSpotify(data){
+  {fs.readFile("random.txt", "utf-8", function (error, data) {
     var command;
     var query;
-    // If there is a comma, then we will split the string from file in order to differentiate between the command and query
-    // 	--> if there is no comma, then only the command is considered (my-tweets)
-    if (data.indexOf(",") !== -1) function searchSpotify(query) {
-      console.log("hi")
-        var dataArr = data.split(",");
-        if (dataArr[0] === 'spotify-this-song') {
-          spotifySongToSearch = (dataArr[1])
-          searchSpotify(spotifySongToSearch)
-          // console.log(dataArr)
-        } 
+    if (data.indexOf(",") !== -1) {
+      var dataArr = data.split(",");
+      if (dataArr[0] === 'spotify-this-song') {
+        spotifySongToSearch = (dataArr[1])
+        // searchSpotify(spotifySongToSearch)
+        console.log(dataArr)
       }
+    }
   })
-  var searchSpotify = process.argv[3]
+  // var spotifySongToSearch = process.argv[3]
+  // if (spotifySongToSearch === "do-what-it-says") {
+  //   searchSpotify(spotifySongToSearch)
+  // } 
 }
